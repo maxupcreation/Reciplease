@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C39B16E259FCF1B00AD0D0D /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C39B16D259FCF1B00AD0D0D /* CoreDataStack.swift */; };
+		9C39B16F259FCF1B00AD0D0D /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C39B16D259FCF1B00AD0D0D /* CoreDataStack.swift */; };
+		9C39B173259FCF8400AD0D0D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C39B172259FCF8400AD0D0D /* CoreDataManager.swift */; };
+		9C39B174259FCF8400AD0D0D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C39B172259FCF8400AD0D0D /* CoreDataManager.swift */; };
+		9C39B18225A20CE500AD0D0D /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C39B18125A20CE400AD0D0D /* TabBarViewController.swift */; };
 		9C945CD9259A49EA00D7F7B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C945CD8259A49EA00D7F7B3 /* AppDelegate.swift */; };
 		9C945CDB259A49EA00D7F7B3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C945CDA259A49EA00D7F7B3 /* SceneDelegate.swift */; };
-		9C945CDD259A49EA00D7F7B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C945CDC259A49EA00D7F7B3 /* ViewController.swift */; };
+		9C945CDD259A49EA00D7F7B3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C945CDC259A49EA00D7F7B3 /* SearchViewController.swift */; };
 		9C945CE0259A49EA00D7F7B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C945CDE259A49EA00D7F7B3 /* Main.storyboard */; };
 		9C945CE3259A49EA00D7F7B3 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9C945CE1259A49EA00D7F7B3 /* Reciplease.xcdatamodeld */; };
 		9C945CE5259A49F500D7F7B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C945CE4259A49F500D7F7B3 /* Assets.xcassets */; };
@@ -28,10 +33,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9C39B16D259FCF1B00AD0D0D /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		9C39B172259FCF8400AD0D0D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		9C39B18125A20CE400AD0D0D /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		9C945CD5259A49EA00D7F7B3 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C945CD8259A49EA00D7F7B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C945CDA259A49EA00D7F7B3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9C945CDC259A49EA00D7F7B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9C945CDC259A49EA00D7F7B3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9C945CDF259A49EA00D7F7B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9C945CE2259A49EA00D7F7B3 /* Reciplease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease.xcdatamodel; sourceTree = "<group>"; };
 		9C945CE4259A49F500D7F7B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -72,6 +80,8 @@
 		9C00C0C3259A4B96002FDEB7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9C39B16D259FCF1B00AD0D0D /* CoreDataStack.swift */,
+				9C39B172259FCF8400AD0D0D /* CoreDataManager.swift */,
 				9C945CE1259A49EA00D7F7B3 /* Reciplease.xcdatamodeld */,
 			);
 			path = Model;
@@ -80,7 +90,8 @@
 		9C00C0C4259A4BA2002FDEB7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				9C945CDC259A49EA00D7F7B3 /* ViewController.swift */,
+				9C945CDC259A49EA00D7F7B3 /* SearchViewController.swift */,
+				9C39B18125A20CE400AD0D0D /* TabBarViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -179,7 +190,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1170;
-				LastUpgradeCheck = 1170;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = Maxime;
 				TargetAttributes = {
 					9C945CD4259A49EA00D7F7B3 = {
@@ -235,8 +246,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C39B173259FCF8400AD0D0D /* CoreDataManager.swift in Sources */,
+				9C39B16E259FCF1B00AD0D0D /* CoreDataStack.swift in Sources */,
 				9C945CE3259A49EA00D7F7B3 /* Reciplease.xcdatamodeld in Sources */,
-				9C945CDD259A49EA00D7F7B3 /* ViewController.swift in Sources */,
+				9C39B18225A20CE500AD0D0D /* TabBarViewController.swift in Sources */,
+				9C945CDD259A49EA00D7F7B3 /* SearchViewController.swift in Sources */,
 				9C945CD9259A49EA00D7F7B3 /* AppDelegate.swift in Sources */,
 				9C945CDB259A49EA00D7F7B3 /* SceneDelegate.swift in Sources */,
 			);
@@ -246,7 +260,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C39B174259FCF8400AD0D0D /* CoreDataManager.swift in Sources */,
 				9C945CF3259A49F500D7F7B3 /* RecipleaseTests.swift in Sources */,
+				9C39B16F259FCF1B00AD0D0D /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +322,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -366,6 +383,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -400,7 +418,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2JZJR57TRU;
-				INFOPLIST_FILE = Reciplease/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Reciplease/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -418,7 +436,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2JZJR57TRU;
-				INFOPLIST_FILE = Reciplease/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Reciplease/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
