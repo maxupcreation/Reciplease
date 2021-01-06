@@ -46,16 +46,23 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         
     }
     
+    
+    //MARK:- BUTTON ACTION 🔴
+    
     @IBAction func tappedDeleteButton(_ sender: Any) {
         coreDataManager?.deleteAllTasks()
         ingredientsTableView.reloadData()
     }
     
+    @IBAction func tappedSearchButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "SearchSegue", sender: self)
+    }
     
     @IBAction func addIngredientsAction(_ sender: Any) {
         addIngredientInTableView()
         
     }
+    
     
     //MARK:-CONDITION ☝🏻
     
@@ -91,11 +98,8 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     func cornerRadiusEffect(){
         let cornerRadiusInt = 7
         
-        appNameLabel.layer.cornerRadius = CGFloat(cornerRadiusInt)
-        appNameLabel.layer.masksToBounds = true
-        
+     
         addIngredientsButton.layer.cornerRadius = CGFloat(cornerRadiusInt)
-        appNameLabel.layer.masksToBounds = true
         
         clearButton.layer.cornerRadius = CGFloat(cornerRadiusInt)
         clearButton.layer.masksToBounds = true
