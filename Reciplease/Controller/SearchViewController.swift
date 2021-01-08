@@ -30,6 +30,7 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     //--
     
     var coreDataManager: CoreDataManager?
+    private let service: RequestService = RequestService()
     
     
     //MARK:- VIEW-CYCLE ♻️
@@ -56,6 +57,22 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     
     @IBAction func tappedSearchButton(_ sender: Any) {
         self.performSegue(withIdentifier: "SearchSegue", sender: self)
+        
+        service.getData(food:"chicken") { result in
+            DispatchQueue.main.async {
+                
+            
+            switch result {
+            case .success(let data):
+                print(data.hits.count)
+                print(data.from)
+                
+            case .failure(let error):
+                print(error)
+            }
+            }
+        }
+        
     }
     
     @IBAction func addIngredientsAction(_ sender: Any) {
@@ -76,7 +93,6 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
             ingredientsTableView.reloadData()
             ingredientsTextField.text = ""
         }
-        
         
     }
     
@@ -109,8 +125,8 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         
         ingredientsTableView.layer.cornerRadius = CGFloat(cornerRadiusInt)
         ingredientsTableView.layer.masksToBounds = true
+        
     }
-    
 }
 
 
