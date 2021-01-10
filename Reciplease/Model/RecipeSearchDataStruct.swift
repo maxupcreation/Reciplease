@@ -27,7 +27,7 @@ struct Recipe: Decodable {
     let label: String
     
     //URL de l'image
-    let image: String?
+    let image: String
     
     //URL de la recette originale
     let url: String

@@ -30,6 +30,7 @@
                     return
                 }
                 guard dataResponse.response?.statusCode == 200 else {
+                    print(data)
                     callback(.failure(.invalidResponse))
                     return
                 }

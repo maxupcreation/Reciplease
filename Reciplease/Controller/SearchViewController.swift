@@ -30,7 +30,9 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     
     var coreDataManager: CoreDataManager?
     private let service: RequestService = RequestService()
-    var dataRecipe : RecipeSearchDataStruct!
+    
+    
+    var dataRecipe : RecipeSearchDataStruct?
     
     
     //MARK:- VIEW-CYCLE ♻️
@@ -63,33 +65,33 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     @IBAction func tappedSearchButton(_ sender: Any) {
         
         service.getData(food:"chicken") { result in
-            //DispatchQueue.main.async
-                
             
-            switch result {
-            case .success(let data):
-                
-                
-                func prepare(for segue: UIStoryboardSegue, sender: Any) {
-                        if segue.identifier == "SearchSegue" {
-                            let successResult = segue.destination as! ResultSearchControllerViewController
-                            successResult.dataRecipe = data
-                        }
-                    }
-                
-                self.performSegue(withIdentifier: "SearchSegue", sender: (Any).self)
-                
-                
-                print(data.hits.count)
-                print(data.from)
-                print(data.q)
-                
-            case .failure(let error):
-                print(error)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    
+                    self.dataRecipe = data
+                    
+                   // if self.dataRecipe != nil {
+                        self.performSegue(withIdentifier: "searchSegue", sender: (Any).self)
+                    //}
+    //                print(data.hits.count)
+    //                print(data.from)
+    //                print(data.q)
+    //
+                case .failure(let error):
+                    print(error)
+                }
             }
-            
         }
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let recipesVC = segue.destination as? ResultSearchControllerViewController, let dataRecipe = dataRecipe {
+            recipesVC.dataRecipe = dataRecipe
+        }
+        //Essayer de comprendre pourquoi ça a marché
     }
     
     @IBAction func addIngredientsAction(_ sender: Any) {

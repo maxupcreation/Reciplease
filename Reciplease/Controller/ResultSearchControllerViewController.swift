@@ -30,23 +30,26 @@ extension ResultSearchControllerViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return dataRecipe.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let recipeCell =
             tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)  as? RecipeCelllTableViewCell
-        DispatchQueue.main.async {
-            guard let title = self.dataRecipe.hits.first?.recipe.label else { return}
-            let ingredients = self.dataRecipe.hits.first?.recipe.ingredients[0].text ?? "noData"
-            
-            let recipeImage = self.dataRecipe?.hits.first?.recipe.image!
-            // let like ?
-            let time = self.dataRecipe.hits.first?.recipe.totalTime! ?? 0
-            
-            recipeCell?.configure(title:title,ingredients: ingredients , recipeImage: recipeImage!, time:time)
-        }
+        
+        let title = dataRecipe.hits.first?.recipe.label ?? "no label"
+
+        let ingredients = dataRecipe.hits.first?.recipe.ingredients[0].text ?? "noData"
+        
+        let recipeImage = dataRecipe?.hits.first?.recipe.image.description
+        // let like ?
+        
+        let time =
+            dataRecipe.hits.first?.recipe.totalTime! ?? 0
+        
+        recipeCell?.configure(title:title,ingredients: ingredients , recipeImage: recipeImage!, time:time)
+        
         
         return recipeCell!
         

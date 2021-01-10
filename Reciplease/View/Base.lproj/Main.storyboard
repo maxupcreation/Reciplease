@@ -293,7 +293,7 @@
                         <outlet property="ingredientsTableView" destination="cVc-iU-bxj" id="xM1-Wv-SBy"/>
                         <outlet property="ingredientsTextField" destination="5GQ-tq-Y10" id="q0c-Bd-1sU"/>
                         <outlet property="questionLabel" destination="6Pe-cc-56j" id="J0R-Qw-fLF"/>
-                        <segue destination="smJ-RC-kr2" kind="show" identifier="SearchSegue" id="rUg-tE-deQ"/>
+                        <segue destination="smJ-RC-kr2" kind="show" identifier="searchSegue" id="rUg-tE-deQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2qa-Dv-0He" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
