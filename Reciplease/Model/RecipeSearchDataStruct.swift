@@ -3,7 +3,7 @@
 //
 //   let welcome = try? newJSONDecoder().decode(Welcome.self, from: jsonData)
 
-import Foundation
+import UIKit
 
 // MARK: - Welcome
 struct RecipeSearchDataStruct: Decodable {
@@ -22,50 +22,29 @@ struct Hit: Decodable {
 
 // MARK: - Recipe
 struct Recipe: Decodable {
-    let uri: String
+    
+    //Titre de la recette
     let label: String
-    let image: String
-    let source: String
+    
+    //URL de l'image
+    let image: String?
+    
+    //URL de la recette originale
     let url: String
-    let shareAs: String
+    
+    //Portions
     let yield: Int
-    let dietLabels, healthLabels, cautions, ingredientLines: [String]
+    
+    //liste d'ingrédient
     let ingredients: [Ingredient]
-    let calories, totalWeight: Double
-    let totalTime: Int
-    let totalNutrients, totalDaily: [String: Total]
-    let digest: [Digest]
-}
-
-// MARK: - Digest
-struct Digest: Decodable {
-    let label, tag: String
-    let schemaOrgTag: String?
-    let total: Double
-    let hasRDI: Bool
-    let daily: Double
-    let unit: Unit
-    let sub: [Digest]?
-}
-
-enum Unit: String, Decodable {
-    case empty = "%"
-    case g = "g"
-    case kcal = "kcal"
-    case mg = "mg"
-    case µg = "µg"
-}
-
-// MARK: - Ingredient
-struct Ingredient: Decodable {
-    let text: String
-    let weight: Double
-    let image: String
-}
-
-// MARK: - Total
-struct Total: Decodable {
-    let label: String
-    let quantity: Double
-    let unit: Unit
+    
+    //temps de préparation
+    let totalTime: Int?
+    
+    // MARK: - Ingredient
+    struct Ingredient: Decodable {
+        let text: String
+        let weight: Double
+        let image: String?
+    }
 }

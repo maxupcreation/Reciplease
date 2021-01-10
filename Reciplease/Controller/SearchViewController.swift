@@ -5,7 +5,6 @@
 //  Created by Maxime on 28/12/2020.
 //  Copyright © 2020 Maxime. All rights reserved.
 //
-import CoreData
 import UIKit
 
 class SearchViewController: UIViewController,UITextFieldDelegate {
@@ -31,6 +30,7 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     
     var coreDataManager: CoreDataManager?
     private let service: RequestService = RequestService()
+    var dataRecipe : RecipeSearchDataStruct!
     
     
     //MARK:- VIEW-CYCLE ♻️
@@ -43,11 +43,16 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         
         coreDataManager = CoreDataManager(coreDataStack: appDelegate.coreDataStack)
         
+        let nibName = UINib(nibName: "tableViewCell", bundle: nil)
+        ingredientsTableView.register(nibName, forCellReuseIdentifier: "tableViewCellResult")
+        
+        
         ingredientsTableView.reloadData()
         
+        
+        
     }
-    
-    
+
     //MARK:- BUTTON ACTION 🔴
     
     @IBAction func tappedDeleteButton(_ sender: Any) {
@@ -56,21 +61,33 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func tappedSearchButton(_ sender: Any) {
-        self.performSegue(withIdentifier: "SearchSegue", sender: self)
         
         service.getData(food:"chicken") { result in
-            DispatchQueue.main.async {
+            //DispatchQueue.main.async
                 
             
             switch result {
             case .success(let data):
+                
+                
+                func prepare(for segue: UIStoryboardSegue, sender: Any) {
+                        if segue.identifier == "SearchSegue" {
+                            let successResult = segue.destination as! ResultSearchControllerViewController
+                            successResult.dataRecipe = data
+                        }
+                    }
+                
+                self.performSegue(withIdentifier: "SearchSegue", sender: (Any).self)
+                
+                
                 print(data.hits.count)
                 print(data.from)
+                print(data.q)
                 
             case .failure(let error):
                 print(error)
             }
-            }
+            
         }
         
     }
@@ -94,6 +111,7 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
             ingredientsTextField.text = ""
         }
         
+        
     }
     
     //MARK:- KEYBOARD GESTION ⌨️
@@ -114,7 +132,6 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     func cornerRadiusEffect(){
         let cornerRadiusInt = 7
         
-     
         addIngredientsButton.layer.cornerRadius = CGFloat(cornerRadiusInt)
         
         clearButton.layer.cornerRadius = CGFloat(cornerRadiusInt)
