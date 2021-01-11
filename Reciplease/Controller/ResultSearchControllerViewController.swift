@@ -40,8 +40,9 @@ extension ResultSearchControllerViewController: UITableViewDataSource {
         let recipeCell =
             tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)  as? RecipeCelllTableViewCell
         
+        let dataIndexPath = dataRecipe?.hits[indexPath.row].recipe
 
-        recipeCell?.configure(dataRecipe: dataRecipe!)
+        recipeCell?.configure(dataRecipe: dataIndexPath!)
         
         
         return recipeCell!
