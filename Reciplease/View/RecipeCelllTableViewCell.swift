@@ -33,11 +33,21 @@ class RecipeCelllTableViewCell: UITableViewCell {
     }
     
     
-    func configure(title:String,ingredients:String,recipeImage:String,time:Int) {
+    func configure(dataRecipe: RecipeSearchDataStruct) {
+        
+        let title = dataRecipe.hits.first?.recipe.label
+        
+        let ingredients = dataRecipe.hits.first?.recipe.ingredients[0].text
+        
+        let recipeImage = dataRecipe.hits.first?.recipe.image
+        // let like ?
+        
+        let time =
+            dataRecipe.hits.first?.recipe.totalTime ?? 0
         
         titleLabel.text = title 
         ingredientsLabel.text = ingredients
-        recipeImageView.image = UIImage(named:recipeImage)
+        recipeImageView.image = UIImage(named:recipeImage!)
         timeLabel.text = String(time)
     }
     

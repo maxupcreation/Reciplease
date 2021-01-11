@@ -72,9 +72,9 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
                     
                     self.dataRecipe = data
                     
-                   // if self.dataRecipe != nil {
+                
                         self.performSegue(withIdentifier: "searchSegue", sender: (Any).self)
-                    //}
+                    
     //                print(data.hits.count)
     //                print(data.from)
     //                print(data.q)
@@ -91,7 +91,6 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         if let recipesVC = segue.destination as? ResultSearchControllerViewController, let dataRecipe = dataRecipe {
             recipesVC.dataRecipe = dataRecipe
         }
-        //Essayer de comprendre pourquoi ça a marché
     }
     
     @IBAction func addIngredientsAction(_ sender: Any) {
@@ -112,8 +111,6 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
             ingredientsTableView.reloadData()
             ingredientsTextField.text = ""
         }
-        
-        
     }
     
     //MARK:- KEYBOARD GESTION ⌨️
