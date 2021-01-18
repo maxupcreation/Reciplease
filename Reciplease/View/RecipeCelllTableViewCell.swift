@@ -16,14 +16,14 @@ class RecipeCelllTableViewCell: UITableViewCell {
     
     @IBOutlet weak var recipeImageView: UIImageView!
     
-    @IBOutlet weak var likeLabel: UILabel!
+    @IBOutlet weak var calorieLabel: UILabel!
     
     @IBOutlet weak var timeLabel: UILabel!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+      
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -40,16 +40,45 @@ class RecipeCelllTableViewCell: UITableViewCell {
         let ingredients = dataRecipe.ingredients[0].text
         
         let recipeImage = dataRecipe.image
-        // let like ?
         
-        let time =
-            dataRecipe.totalTime ?? 0
+        
+        let calorie = dataRecipe.calories
+        let formated = String(format: "%.1f k", calorie)
+        calorieLabel.text = formated
+        
+        
+        let time = dataRecipe.totalTime ?? 0
         
         titleLabel.text = title 
         ingredientsLabel.text = ingredients
-        recipeImageView.image = UIImage(named:recipeImage)
-        timeLabel.text = String(time)
+        
+        timeLabel.text = String(time) + "m"
+        recipeImageView.load(url: URL(string:recipeImage!)!)
+    }
+    
+    func configureCoreData(coreDataRecipe: FavoriteRecipe) {
+        
+        titleLabel.text = coreDataRecipe.label
+        timeLabel.text = coreDataRecipe.totalTime
+        ingredientsLabel.text = coreDataRecipe.ingredients
+        calorieLabel.text = coreDataRecipe.calories
     }
     
     
+    
+    
+}
+
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
 }

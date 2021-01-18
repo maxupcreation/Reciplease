@@ -9,11 +9,12 @@ import UIKit
 
 class SearchViewController: UIViewController,UITextFieldDelegate {
     
-    //MARK:- VARIABLE 📦
     
-    //Outlet
+    
+    //MARK:- OutLet 🔗
     
     @IBOutlet weak var ingredientsTextField: UITextField!
+    
     @IBOutlet weak var appNameLabel: UILabel!
     
     @IBOutlet weak var addIngredientsButton: UIButton!
@@ -26,19 +27,24 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var ingredientsTableView: UITableView!
     
-    //--
+    //MARK:- Propreties 📦
     
     var coreDataManager: CoreDataManager?
-    private let service: RequestService = RequestService()
     
+    private let service: RequestService = RequestService()
     
     var dataRecipe : RecipeSearchDataStruct?
     
     
-    //MARK:- VIEW-CYCLE ♻️
+    
+    //MARK:- View Cycle ♻️
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "", style: .plain, target: nil, action: nil)
+        
         cornerRadiusEffect()
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
@@ -54,8 +60,9 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         
         
     }
-
-    //MARK:- BUTTON ACTION 🔴
+    
+    //MARK:- Button Action 🔴
+    
     
     @IBAction func tappedDeleteButton(_ sender: Any) {
         coreDataManager?.deleteAllTasks()
@@ -72,13 +79,9 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
                     
                     self.dataRecipe = data
                     
-                
-                        self.performSegue(withIdentifier: "searchSegue", sender: (Any).self)
                     
-    //                print(data.hits.count)
-    //                print(data.from)
-    //                print(data.q)
-    //
+                    self.performSegue(withIdentifier: "searchSegue", sender: (Any).self)
+                    
                 case .failure(let error):
                     print(error)
                 }
@@ -88,7 +91,7 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let recipesVC = segue.destination as? ResultSearchControllerViewController, let dataRecipe = dataRecipe {
+        if let recipesVC = segue.destination as? ResultSearchViewController, let dataRecipe = dataRecipe {
             recipesVC.dataRecipe = dataRecipe
         }
     }
@@ -99,7 +102,7 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     }
     
     
-    //MARK:-CONDITION ☝🏻
+    //MARK:- Conditions☝🏻
     
     
     func addIngredientInTableView() {
@@ -113,7 +116,7 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
-    //MARK:- KEYBOARD GESTION ⌨️
+    //MARK:- KeyBoard Gestion ⌨️
     
     @IBAction func dismissKeyboard(_ sender: Any) {
         ingredientsTextField.resignFirstResponder()
@@ -126,7 +129,7 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     }
     
     
-    //MARK:- ANIMATE ⚡️
+    //MARK:- Animate ⚡️
     
     func cornerRadiusEffect(){
         let cornerRadiusInt = 7
@@ -146,7 +149,7 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
 }
 
 
-//MARK:- EXTENSION ↔️
+//MARK:- Extension ↔️
 
 extension SearchViewController: UITableViewDataSource{
     

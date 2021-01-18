@@ -23,6 +23,13 @@ final class CoreDataManager {
         guard let person = try? managedObjectContext.fetch(request) else { return [] }
         return person
     }
+    
+    var favorite: [FavoriteRecipe] {
+        let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
+        //request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        guard let favorite = try? managedObjectContext.fetch(request) else { return [] }
+        return favorite
+    }
 
     // MARK: - Initializer
 
@@ -32,6 +39,25 @@ final class CoreDataManager {
     }
 
     // MARK: - Manage func Entity
+    
+    func createFavorite(label:String,calories:String,image:String,ingredients:String,totalTime:String,yield:String,url:String,starIcone:String){
+        let favorite = FavoriteRecipe(context: managedObjectContext)
+        favorite.label = label
+        favorite.calories = calories
+        favorite.image = image
+        favorite.ingredients = ingredients
+        favorite.totalTime = totalTime
+        favorite.yield = yield
+        favorite.url = url
+        favorite.starIcone = starIcone
+        coreDataStack.saveContext()
+    }
+    
+    func deleteFavorite(indexPath : Int){
+        let removeFavorite = favorite[indexPath]
+        managedObjectContext.delete(removeFavorite)
+        coreDataStack.saveContext()
+    }
 
     func createIngredients(ingredient: String) {
         let person = Person(context: managedObjectContext)

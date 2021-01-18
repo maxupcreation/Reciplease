@@ -10,14 +10,13 @@ struct RecipeSearchDataStruct: Decodable {
     let q: String
     let from, to: Int
     let more: Bool
-    let count: Int
     let hits: [Hit]
 }
 
 // MARK: - Hit
 struct Hit: Decodable {
     let recipe: Recipe
-    let bookmarked, bought: Bool
+  //  let bookmarked, bought: Bool
 }
 
 // MARK: - Recipe
@@ -27,7 +26,7 @@ struct Recipe: Decodable {
     let label: String
     
     //URL de l'image
-    let image: String
+    let image: String?
     
     //URL de la recette originale
     let url: String
@@ -40,6 +39,8 @@ struct Recipe: Decodable {
     
     //temps de préparation
     let totalTime: Int?
+    
+    let calories : Float
     
     // MARK: - Ingredient
     struct Ingredient: Decodable {
