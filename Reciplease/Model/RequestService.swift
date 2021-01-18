@@ -21,7 +21,7 @@
             
             guard let mainUrl = URL(string:"https://api.edamam.com/search?") else {return}
             
-            let parameters = [("q",food),("app_id","4cd6a87a"),("app_key","ec8a043cd61e4611c5f52cc748eacb01"),("from",0),("to",3),("calories","0-1000")] as [(String, Any)]?
+            let parameters = [("q",food),("app_id","4cd6a87a"),("app_key","ec8a043cd61e4611c5f52cc748eacb01"),("from",0),("to",10),("calories","0-1000")] as [(String, Any)]?
             
             let url = encode(baseUrl: mainUrl, with: parameters)
             session.request(url: url) { dataResponse in

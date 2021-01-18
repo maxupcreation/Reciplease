@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		9C39B16F259FCF1B00AD0D0D /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C39B16D259FCF1B00AD0D0D /* CoreDataStack.swift */; };
 		9C39B173259FCF8400AD0D0D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C39B172259FCF8400AD0D0D /* CoreDataManager.swift */; };
 		9C39B174259FCF8400AD0D0D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C39B172259FCF8400AD0D0D /* CoreDataManager.swift */; };
+		9C41DEFD25B5E44300CB65C4 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9C41DEFC25B5E44300CB65C4 /* SDWebImage */; };
+		9C41DEFF25B5E44300CB65C4 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9C41DEFE25B5E44300CB65C4 /* SDWebImageMapKit */; };
 		9C945CD9259A49EA00D7F7B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C945CD8259A49EA00D7F7B3 /* AppDelegate.swift */; };
 		9C945CDB259A49EA00D7F7B3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C945CDA259A49EA00D7F7B3 /* SceneDelegate.swift */; };
 		9C945CDD259A49EA00D7F7B3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C945CDC259A49EA00D7F7B3 /* SearchViewController.swift */; };
@@ -71,6 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C41DEFD25B5E44300CB65C4 /* SDWebImage in Frameworks */,
+				9C41DEFF25B5E44300CB65C4 /* SDWebImageMapKit in Frameworks */,
 				2C15640AE82A36FCCD0A56A8 /* Pods_Reciplease.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -196,6 +200,10 @@
 			dependencies = (
 			);
 			name = Reciplease;
+			packageProductDependencies = (
+				9C41DEFC25B5E44300CB65C4 /* SDWebImage */,
+				9C41DEFE25B5E44300CB65C4 /* SDWebImageMapKit */,
+			);
 			productName = Reciplease;
 			productReference = 9C945CD5259A49EA00D7F7B3 /* Reciplease.app */;
 			productType = "com.apple.product-type.application";
@@ -246,6 +254,9 @@
 				Base,
 			);
 			mainGroup = 9C945CCC259A49EA00D7F7B3;
+			packageReferences = (
+				9C41DEFB25B5E44300CB65C4 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 9C945CD6259A49EA00D7F7B3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -605,6 +616,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9C41DEFB25B5E44300CB65C4 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9C41DEFC25B5E44300CB65C4 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C41DEFB25B5E44300CB65C4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		9C41DEFE25B5E44300CB65C4 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C41DEFB25B5E44300CB65C4 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		9C945CE1259A49EA00D7F7B3 /* Reciplease.xcdatamodeld */ = {

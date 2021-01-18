@@ -35,6 +35,8 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     
     var dataRecipe : RecipeSearchDataStruct?
     
+    var food : String?
+    
     
     
     //MARK:- View Cycle ♻️
@@ -69,9 +71,14 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         ingredientsTableView.reloadData()
     }
     
+    
     @IBAction func tappedSearchButton(_ sender: Any) {
         
-        service.getData(food:"chicken") { result in
+        for foodArray in coreDataManager!.person {
+           print(foodArray)
+        }
+        
+        service.getData(food: "tomatoes" ) { result in
             
             DispatchQueue.main.async {
                 switch result {
@@ -170,6 +177,20 @@ extension SearchViewController: UITableViewDataSource{
         
         return taskCell
     }
+    
+    //— 💡 Stylish animation to the cell display.
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let translationMovement = CATransform3DTranslate(CATransform3DIdentity, 0, 20, 0)
+        cell.layer.transform = translationMovement
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.20) {
+            cell.layer.transform = CATransform3DIdentity
+            cell.alpha = 1
+        }
+        
+        cell.selectionStyle = .none
+    }
 }
 
 
@@ -185,3 +206,5 @@ extension SearchViewController:UITableViewDelegate {
         }
     }
 }
+
+

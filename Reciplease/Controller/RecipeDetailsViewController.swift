@@ -12,6 +12,8 @@ class RecipeDetailsViewController: UIViewController {
     
     //MARK:- OutLet 🔗
     
+    @IBOutlet weak var infosStackView: UIStackView!
+    
     @IBOutlet weak var recipeImageView: UIImageView!
     
     @IBOutlet weak var timeLabel: UILabel!
@@ -49,6 +51,9 @@ class RecipeDetailsViewController: UIViewController {
     //MARK:- View Cycle ♻️
     
     override func viewDidLoad() {
+        
+        infosStackView.layer.cornerRadius = CGFloat(7)
+        infosStackView.layer.masksToBounds = true
         
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "", style: .plain, target: nil, action: nil)
@@ -107,12 +112,19 @@ class RecipeDetailsViewController: UIViewController {
     
     func configure() {
         
-        
         nameRecipeLabel.text = dataRecipeIndexPath?.label
+        
+        let recipeImage = dataRecipeIndexPath?.image
+        recipeImageView.sd_setImage(with: URL(string:recipeImage!))
+       
         
         timeLabel.text = String(dataRecipeIndexPath?.totalTime ?? 0) + "m"
         
-        ingredientsTextView.text = dataRecipeIndexPath?.ingredients.first?.text
+        
+        let ingredients = dataRecipeIndexPath?.ingredients.first?.text
+        let splitIngredientsWithTired = "-" + " " + ingredients!
+        let splitIngredients = splitIngredientsWithTired.components(separatedBy: ",")
+        ingredientsTextView.text = splitIngredients.joined(separator: "\n - ")
         
         //— 💡 Converted the data "calories" with a number "x" after the decimal point for CoreData.
         
@@ -123,7 +135,7 @@ class RecipeDetailsViewController: UIViewController {
         
         //X
         
-        recipeImageView.contentMode = .scaleAspectFit
+        recipeImageView.contentMode = .scaleAspectFill
         
         //— 💡 The url for passenger the data to the button "Get direction". *UrlGetDirectionButton
         

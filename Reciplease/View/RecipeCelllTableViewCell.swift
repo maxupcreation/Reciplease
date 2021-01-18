@@ -39,21 +39,29 @@ class RecipeCelllTableViewCell: UITableViewCell {
         
         let ingredients = dataRecipe.ingredients[0].text
         
-        let recipeImage = dataRecipe.image
         
+        //— 💡 Calorie Formated
         
         let calorie = dataRecipe.calories
         let formated = String(format: "%.1f k", calorie)
         calorieLabel.text = formated
         
+        //X
         
         let time = dataRecipe.totalTime ?? 0
         
-        titleLabel.text = title 
+        titleLabel.text = title
+        
         ingredientsLabel.text = ingredients
         
         timeLabel.text = String(time) + "m"
-        recipeImageView.load(url: URL(string:recipeImage!)!)
+        
+        //— 💡 Load Image
+        
+        let recipeImage = dataRecipe.image!
+        recipeImageView.sd_setImage(with: URL(string:recipeImage))
+        
+        //X
     }
     
     func configureCoreData(coreDataRecipe: FavoriteRecipe) {
@@ -62,6 +70,7 @@ class RecipeCelllTableViewCell: UITableViewCell {
         timeLabel.text = coreDataRecipe.totalTime
         ingredientsLabel.text = coreDataRecipe.ingredients
         calorieLabel.text = coreDataRecipe.calories
+        
     }
     
     
@@ -69,16 +78,18 @@ class RecipeCelllTableViewCell: UITableViewCell {
     
 }
 
-extension UIImageView {
-    func load(url: URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
-            }
-        }
-    }
-}
+////— 💡 extension for load image with Url
+//
+//extension UIImageView {
+//    func load(url: URL) {
+//        DispatchQueue.global().async { [weak self] in
+//            if let data = try? Data(contentsOf: url) {
+//                if let image = UIImage(data: data) {
+//                    DispatchQueue.main.async {
+//                        self?.image = image
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
