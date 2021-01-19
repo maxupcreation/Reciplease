@@ -25,6 +25,8 @@ class ResultSearchViewController: UIViewController{
     
     //X
     
+    var coreDataManager : CoreDataManager?
+    
     //MARK:- View Cycle ♻️
     
     override func viewDidLoad() {
@@ -33,7 +35,8 @@ class ResultSearchViewController: UIViewController{
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "", style: .plain, target: nil, action: nil)
         
-        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        coreDataManager = CoreDataManager(coreDataStack: appDelegate.coreDataStack)
         
         setupCustomCell()
         setTableViewDataSourceAndDelegate()

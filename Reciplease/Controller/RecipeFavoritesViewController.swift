@@ -18,7 +18,6 @@ class RecipeFavoritesViewController: UIViewController {
     //MARK:- Propreties 📦
     var coreDataManager: CoreDataManager?
     
-    
     //MARK:- View Cycle ♻️
     
     override func viewDidLoad() {
@@ -93,3 +92,12 @@ func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) ->
 }
 
 //X
+
+
+extension RecipeFavoritesViewController:UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.performSegue(withIdentifier: "favoriteRecipeToDetails", sender: (Any).self)
+    }
+}

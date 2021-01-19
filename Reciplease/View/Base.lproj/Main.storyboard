@@ -192,7 +192,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Reciplease" id="gKR-OW-HgS">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="star" catalog="system" style="plain" id="CEd-gM-WaR">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="star" catalog="system" style="done" id="CEd-gM-WaR">
                             <connections>
                                 <action selector="tapedStarButton:" destination="X8L-iI-dhz" id="kgB-TF-g9M"/>
                             </connections>
@@ -497,7 +497,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9TQ-9B-4Vy"/>
+        <segue reference="ZbX-vh-wJC"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>

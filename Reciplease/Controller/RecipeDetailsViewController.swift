@@ -47,7 +47,8 @@ class RecipeDetailsViewController: UIViewController {
     //— 💡 Manage CoreData Entity
     
     var coreDataManager: CoreDataManager?
-    
+
+
     //MARK:- View Cycle ♻️
     
     override func viewDidLoad() {
@@ -67,9 +68,8 @@ class RecipeDetailsViewController: UIViewController {
         
         configure()
         
-        if (coreDataManager?.favorite.count)! > 0  {
-            ifStarIconeIsFillInDataBaseThenIsFillInView(indexPath: indexPathForCoreData!)
-        }
+       ifStarIconeIsFillInDataBaseThenIsFillInView(indexPath: indexPathForCoreData!)
+        
     }
     
     //MARK:- Button Action 🔴
@@ -85,6 +85,7 @@ class RecipeDetailsViewController: UIViewController {
             favoriteItemButton.image = UIImage(systemName: "star.fill")
             
             coreDataManager?.createFavorite (label: dataRecipeIndexPath!.label, calories: calorieLabel.text!, image: "", ingredients: ingredientsTextView.text, totalTime: String(dataRecipeIndexPath?.totalTime ?? 0) + "m", yield: "", url: urlRecipeString!,starIcone:starIcone)
+            
         }
         
         //— 💡 else change the image and delete the favorite from the database.
@@ -115,11 +116,11 @@ class RecipeDetailsViewController: UIViewController {
         nameRecipeLabel.text = dataRecipeIndexPath?.label
         
         let recipeImage = dataRecipeIndexPath?.image
+        
         recipeImageView.sd_setImage(with: URL(string:recipeImage!))
        
         
         timeLabel.text = String(dataRecipeIndexPath?.totalTime ?? 0) + "m"
-        
         
         let ingredients = dataRecipeIndexPath?.ingredients.first?.text
         let splitIngredientsWithTired = "-" + " " + ingredients!
@@ -147,21 +148,15 @@ class RecipeDetailsViewController: UIViewController {
     //MARK:- Conditions☝🏻
     
     func ifStarIconeIsFillInDataBaseThenIsFillInView(indexPath:Int) {
-        
-        if coreDataManager?.favorite[indexPath].starIcone != nil {
-            
+       
             let starIcone = coreDataManager?.favorite[indexPath].starIcone
             
             if starIcone == "star.fill" {
                 self.favoriteItemButton.image = UIImage(systemName: "star.fill")
             }
-            
         }
         
         //MARK:- Others Func 🍱
-        
-       
-        
     }
     
-}
+

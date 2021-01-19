@@ -35,7 +35,7 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     
     var dataRecipe : RecipeSearchDataStruct?
     
-    var food : String?
+    var food : [String] = []
     
     
     
@@ -50,50 +50,54 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         cornerRadiusEffect()
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        
         coreDataManager = CoreDataManager(coreDataStack: appDelegate.coreDataStack)
         
         let nibName = UINib(nibName: "tableViewCell", bundle: nil)
         ingredientsTableView.register(nibName, forCellReuseIdentifier: "tableViewCellResult")
         
+        for foodCore in coreDataManager!.person {
+            if foodCore.ingredients != nil {
+            food = [foodCore.ingredients!]
+            }
+        }
         
         ingredientsTableView.reloadData()
-        
-        
         
     }
     
     //MARK:- Button Action 🔴
     
+    @IBAction func addIngredientsAction(_ sender: Any) {
+        addIngredientInTableViewIfValidCharacters()
+    }
     
     @IBAction func tappedDeleteButton(_ sender: Any) {
         coreDataManager?.deleteAllTasks()
         ingredientsTableView.reloadData()
+        food.removeAll()
     }
     
     
     @IBAction func tappedSearchButton(_ sender: Any) {
         
-        for foodArray in coreDataManager!.person {
-           print(foodArray)
-        }
+        let foodJoined = food.joined(separator: ",")
         
-        service.getData(food: "tomatoes" ) { result in
+        self.service.getData(food: foodJoined) { result in
             
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let data):
-                    
-                    self.dataRecipe = data
-                    
-                    
-                    self.performSegue(withIdentifier: "searchSegue", sender: (Any).self)
-                    
-                case .failure(let error):
-                    print(error)
-                }
+            
+            switch result {
+            case .success(let data):
+                
+                self.dataRecipe = data
+                
+                
+                self.performSegue(withIdentifier: "searchSegue", sender: (Any).self)
+                
+            case .failure(let error):
+                print(error)
             }
         }
+        
         
     }
     
@@ -103,23 +107,20 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
-    @IBAction func addIngredientsAction(_ sender: Any) {
-        addIngredientInTableView()
-        
-    }
-    
     
     //MARK:- Conditions☝🏻
     
     
-    func addIngredientInTableView() {
+    func addIngredientInTableViewIfValidCharacters() {
         
         let ingredients = ingredientsTextField.text ?? ""
-        
         if ingredients != "" {
-            coreDataManager?.createIngredients(ingredient: ingredients)
-            ingredientsTableView.reloadData()
-            ingredientsTextField.text = ""
+            if ingredients.containsValidCharacter == true {
+                coreDataManager?.createIngredients(ingredient: ingredients)
+                food.append(ingredients)
+                ingredientsTableView.reloadData()
+                ingredientsTextField.text = ""
+            }
         }
     }
     
@@ -200,10 +201,39 @@ extension SearchViewController:UITableViewDelegate {
         
         if editingStyle == .delete {
             
+            
             coreDataManager?.deleteTasks(indexPath: indexPath)
+            food.remove(at: indexPath.row)
             
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
+    }
+}
+
+//— 💡 Add a text center in tableView if is nil.
+
+extension SearchViewController {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "Add some ingredients in the list"
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.textAlignment = .center
+        label.textColor = .darkGray
+        return label
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return coreDataManager?.person.isEmpty ?? true ? 200 : 0
+    }
+}
+
+extension String {
+    
+    var containsValidCharacter: Bool {
+        guard self != "" else { return true }
+        let hexSet = CharacterSet(charactersIn: "abdcdefghijklmnopqrstuvwxyz")
+        let newSet = CharacterSet(charactersIn: self)
+        return hexSet.isSuperset(of: newSet)
     }
 }
 
