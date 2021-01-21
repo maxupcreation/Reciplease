@@ -35,9 +35,9 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     
     var dataRecipe : RecipeSearchDataStruct?
     
+    //— 💡 Food Array for passing strings in request
+    
     var food : [String] = []
-    
-    
     
     //MARK:- View Cycle ♻️
     
@@ -49,20 +49,19 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         
         cornerRadiusEffect()
         
+        //— ❗ Allows to update CoreData
+        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         coreDataManager = CoreDataManager(coreDataStack: appDelegate.coreDataStack)
         
-        let nibName = UINib(nibName: "tableViewCell", bundle: nil)
-        ingredientsTableView.register(nibName, forCellReuseIdentifier: "tableViewCellResult")
-        
-        for foodCore in coreDataManager!.person {
-            if foodCore.ingredients != nil {
-            food = [foodCore.ingredients!]
-            }
-        }
+        //X
         
         ingredientsTableView.reloadData()
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        coreDataManager?.deleteAllIgredient()
     }
     
     //MARK:- Button Action 🔴
@@ -72,15 +71,19 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func tappedDeleteButton(_ sender: Any) {
-        coreDataManager?.deleteAllTasks()
-        ingredientsTableView.reloadData()
+        coreDataManager?.deleteAllIgredient()
         food.removeAll()
+        ingredientsTableView.reloadData()
     }
     
     
     @IBAction func tappedSearchButton(_ sender: Any) {
         
+        //— 💡 We join all the strings (ingredients) in the table
+        
         let foodJoined = food.joined(separator: ",")
+        
+        //X
         
         self.service.getData(food: foodJoined) { result in
             
@@ -90,16 +93,17 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
                 
                 self.dataRecipe = data
                 
-                
                 self.performSegue(withIdentifier: "searchSegue", sender: (Any).self)
+                
                 
             case .failure(let error):
                 print(error)
             }
         }
-        
-        
     }
+    
+    //— 💡 Data segue passing
+    //- Self -> ResultSearchViewController
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let recipesVC = segue.destination as? ResultSearchViewController, let dataRecipe = dataRecipe {
@@ -109,7 +113,6 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     
     
     //MARK:- Conditions☝🏻
-    
     
     func addIngredientInTableViewIfValidCharacters() {
         
@@ -203,9 +206,10 @@ extension SearchViewController:UITableViewDelegate {
             
             
             coreDataManager?.deleteTasks(indexPath: indexPath)
-            food.remove(at: indexPath.row)
             
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            tableView.reloadData()
         }
     }
 }
@@ -221,7 +225,7 @@ extension SearchViewController {
         label.textColor = .darkGray
         return label
     }
-
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return coreDataManager?.person.isEmpty ?? true ? 200 : 0
     }

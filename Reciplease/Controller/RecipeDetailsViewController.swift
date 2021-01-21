@@ -33,7 +33,6 @@ class RecipeDetailsViewController: UIViewController {
     //— 💡 Passing of data between segues.
     // self <- ResultSearchController
     
-    var indexPathForCoreData : Int?
     var dataRecipeIndexPath : Recipe?
     
     //— 💡 *UrlGetDirectionButton
@@ -44,14 +43,19 @@ class RecipeDetailsViewController: UIViewController {
     
     var calorieForCoreData: String?
     
+    var nameCoreArray : [String]?
+    
     //— 💡 Manage CoreData Entity
     
     var coreDataManager: CoreDataManager?
-
-
+    
+    
+    
+    
     //MARK:- View Cycle ♻️
     
     override func viewDidLoad() {
+        
         
         infosStackView.layer.cornerRadius = CGFloat(7)
         infosStackView.layer.masksToBounds = true
@@ -68,7 +72,15 @@ class RecipeDetailsViewController: UIViewController {
         
         configure()
         
-       ifStarIconeIsFillInDataBaseThenIsFillInView(indexPath: indexPathForCoreData!)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if coreDataManager?.isRecipeRegistered(name: nameRecipeLabel.text!) == true {
+            
+            favoriteItemButton.image = UIImage(systemName: "star.fill")
+        } else {  favoriteItemButton.image = UIImage(systemName: "star") }
+        
         
     }
     
@@ -76,15 +88,21 @@ class RecipeDetailsViewController: UIViewController {
     
     @IBAction func tapedStarButton(_ sender: Any) {
         
-        let starIcone = "star.fill"
         
         //— 💡 If the button is selected, change the image then create the favorite in the database.
         
-        if favoriteItemButton.image == UIImage(systemName: "star") {
+        if coreDataManager?.isRecipeRegistered(name: nameRecipeLabel.text! ) == false {
             
             favoriteItemButton.image = UIImage(systemName: "star.fill")
             
-            coreDataManager?.createFavorite (label: dataRecipeIndexPath!.label, calories: calorieLabel.text!, image: "", ingredients: ingredientsTextView.text, totalTime: String(dataRecipeIndexPath?.totalTime ?? 0) + "m", yield: "", url: urlRecipeString!,starIcone:starIcone)
+            coreDataManager?.createFavorite (
+                label: dataRecipeIndexPath!.label,
+                calories: calorieLabel.text!,
+                image: "",
+                ingredients: ingredientsTextView.text,
+                totalTime: String(dataRecipeIndexPath?.totalTime ?? 0) + " min",
+                yield: "",
+                url: urlRecipeString!)
             
         }
         
@@ -92,10 +110,8 @@ class RecipeDetailsViewController: UIViewController {
         
         else {
             
-            
             favoriteItemButton.image = UIImage(systemName: "star")
-            
-            coreDataManager?.deleteFavorite(indexPath: indexPathForCoreData!)
+            coreDataManager?.deleteFavorite()
             
         }
     }
@@ -117,8 +133,11 @@ class RecipeDetailsViewController: UIViewController {
         
         let recipeImage = dataRecipeIndexPath?.image
         
+        //— 💡 Sd Web Image Pod gestion
+        
         recipeImageView.sd_setImage(with: URL(string:recipeImage!))
-       
+        
+        //X
         
         timeLabel.text = String(dataRecipeIndexPath?.totalTime ?? 0) + "m"
         
@@ -147,16 +166,5 @@ class RecipeDetailsViewController: UIViewController {
     }
     //MARK:- Conditions☝🏻
     
-    func ifStarIconeIsFillInDataBaseThenIsFillInView(indexPath:Int) {
-       
-            let starIcone = coreDataManager?.favorite[indexPath].starIcone
-            
-            if starIcone == "star.fill" {
-                self.favoriteItemButton.image = UIImage(systemName: "star.fill")
-            }
-        }
-        
-        //MARK:- Others Func 🍱
-    }
     
-
+}

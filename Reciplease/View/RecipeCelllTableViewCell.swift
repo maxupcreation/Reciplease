@@ -43,7 +43,7 @@ class RecipeCelllTableViewCell: UITableViewCell {
         //— 💡 Calorie Formated
         
         let calorie = dataRecipe.calories
-        let formated = String(format: "%.1f k", calorie)
+        let formated = String(format: "%.1f cal", calorie)
         calorieLabel.text = formated
         
         //X
@@ -54,12 +54,13 @@ class RecipeCelllTableViewCell: UITableViewCell {
         
         ingredientsLabel.text = ingredients
         
-        timeLabel.text = String(time) + "m"
+        timeLabel.text = String(time) + " min"
         
         //— 💡 Load Image
         
         let recipeImage = dataRecipe.image!
         recipeImageView.sd_setImage(with: URL(string:recipeImage))
+        //rajouter une image par défaut
         
         //X
     }
@@ -68,7 +69,7 @@ class RecipeCelllTableViewCell: UITableViewCell {
         
         titleLabel.text = coreDataRecipe.label
         timeLabel.text = coreDataRecipe.totalTime
-        ingredientsLabel.text = coreDataRecipe.ingredients
+        //ingredientsLabel.text = coreDataRecipe.ingredients
         calorieLabel.text = coreDataRecipe.calories
         
     }

@@ -30,6 +30,8 @@ final class CoreDataManager {
         guard let favorite = try? managedObjectContext.fetch(request) else { return [] }
         return favorite
     }
+    
+    var commitPredicate = NSPredicate?.self
 
     // MARK: - Initializer
 
@@ -40,21 +42,34 @@ final class CoreDataManager {
 
     // MARK: - Manage func Entity
     
-    func createFavorite(label:String,calories:String,image:String,ingredients:String,totalTime:String,yield:String,url:String,starIcone:String){
+    func isRecipeRegistered(name:String) -> Bool {
+        //Récuperer les recettes
+        let recipe = favorite
+        //Appliquer un filtre (filtrer par nom) NSpredicate
+        let stringPredicate = NSPredicate(format: "label == %@", name)
+        //Executer la requête, je récupére un tableau
+        let recipeArray = recipe.filter() { name in stringPredicate.evaluate(with: name)}
+        if recipeArray.isEmpty { return false } else { return true }
+        // si il est vide, renvoi false, si il contient un element, true
+        // même principe pour la suppression.
+    }
+    
+    
+    
+    func createFavorite(label:String,calories:String,image:String,ingredients:String,totalTime:String,yield:String,url:String){
         let favorite = FavoriteRecipe(context: managedObjectContext)
         favorite.label = label
         favorite.calories = calories
-        favorite.image = image
-        favorite.ingredients = ingredients
+        //favorite.image = image
+       // favorite.ingredients = ingredients
         favorite.totalTime = totalTime
         favorite.yield = yield
         favorite.url = url
-        favorite.starIcone = starIcone
         coreDataStack.saveContext()
     }
     
-    func deleteFavorite(indexPath : Int){
-        let removeFavorite = favorite[indexPath]
+    func deleteFavorite(){
+        let removeFavorite = favorite.last!
         managedObjectContext.delete(removeFavorite)
         coreDataStack.saveContext()
     }
@@ -71,7 +86,7 @@ final class CoreDataManager {
         coreDataStack.saveContext()
     }
     
-    func deleteAllTasks() {
+    func deleteAllIgredient() {
         person.forEach { managedObjectContext.delete($0) }
         coreDataStack.saveContext()
     }

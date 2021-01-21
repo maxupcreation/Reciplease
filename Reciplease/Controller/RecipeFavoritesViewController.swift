@@ -23,7 +23,7 @@ class RecipeFavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        
         //— ❗ Allows to update CoreData
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
@@ -37,6 +37,8 @@ class RecipeFavoritesViewController: UIViewController {
     }
     
 }
+
+//MARK:- Extension ↔️
 
 extension RecipeFavoritesViewController: UITableViewDataSource {
     
@@ -64,7 +66,6 @@ extension RecipeFavoritesViewController: UITableViewDataSource {
     private func setupCustomCell() {
         let nib = UINib(nibName: "RecipeCelllTableViewCell", bundle: nil)
         favoriteTableView.register(nib, forCellReuseIdentifier: "tableViewCell")
-
     }
     
     //X
@@ -93,6 +94,8 @@ func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) ->
 
 //X
 
+
+//MARK:- TableView Delegate
 
 extension RecipeFavoritesViewController:UITableViewDelegate {
     

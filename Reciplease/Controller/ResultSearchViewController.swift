@@ -21,7 +21,6 @@ class ResultSearchViewController: UIViewController{
     //— 💡 *DataSegues
     
     var dataRecipeIndexPath : Recipe?
-    var indexPathForCoreData : Int?
     
     //X
     
@@ -32,15 +31,20 @@ class ResultSearchViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //— 💡 Back button navigation bar gestion
+        
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "", style: .plain, target: nil, action: nil)
+        
+        //— ❗ Allows to update CoreData
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         coreDataManager = CoreDataManager(coreDataStack: appDelegate.coreDataStack)
         
+        //X
+        
         setupCustomCell()
         setTableViewDataSourceAndDelegate()
-        
         
         tableViewSearchResult.reloadData()
     }
@@ -53,7 +57,6 @@ class ResultSearchViewController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let recipesVC = segue.destination as? RecipeDetailsViewController {
             recipesVC.dataRecipeIndexPath = dataRecipeIndexPath
-            recipesVC.indexPathForCoreData = indexPathForCoreData
         }
     }
 }
@@ -111,12 +114,10 @@ extension ResultSearchViewController: UITableViewDataSource {
 extension ResultSearchViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //— 💡 variable to pass the index to the "RecipeDetailsViewController" controller to remove "FavoriteRecipe" data from CoreData.
+        //— 💡 Variable to pass the index to the "RecipeDetailsViewController" controller to remove "FavoriteRecipe" data from CoreData.
         
         let dataIndexPath = dataRecipe?.hits[indexPath.row].recipe
         dataRecipeIndexPath = dataIndexPath
-        
-        indexPathForCoreData = indexPath.row
         
         //X
         

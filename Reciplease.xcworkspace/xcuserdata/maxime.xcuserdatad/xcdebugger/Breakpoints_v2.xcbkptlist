@@ -243,130 +243,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8060C6F4-787C-4504-BFED-73E5FEF1DA05"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reciplease/Controller/ResultSearchViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "ResultSearchViewController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "8060C6F4-787C-4504-BFED-73E5FEF1DA05 - 4281f6dfc31a6a54"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Reciplease.ResultSearchViewController.indexPathForCoreData.getter : Swift.Optional&lt;Swift.Int&gt;"
-                  moduleName = "Reciplease"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maxime/Documents/Reciplease/Reciplease/Controller/ResultSearchViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "112">
-               </Location>
-               <Location
-                  uuid = "8060C6F4-787C-4504-BFED-73E5FEF1DA05 - e617e69eaa5be640"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Reciplease.ResultSearchViewController.indexPathForCoreData.setter : Swift.Optional&lt;Swift.Int&gt;"
-                  moduleName = "Reciplease"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maxime/Documents/Reciplease/Reciplease/Controller/ResultSearchViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "160">
-               </Location>
-               <Location
-                  uuid = "8060C6F4-787C-4504-BFED-73E5FEF1DA05 - 692984fb0d74bc4b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Reciplease.ResultSearchViewController.indexPathForCoreData.modify : Swift.Optional&lt;Swift.Int&gt;"
-                  moduleName = "Reciplease"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maxime/Documents/Reciplease/Reciplease/Controller/ResultSearchViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  uuid = "8060C6F4-787C-4504-BFED-73E5FEF1DA05 - 2155749bc1b867ef"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Reciplease.ResultSearchViewController.indexPathForCoreData.modify : Swift.Optional&lt;Swift.Int&gt; with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "Reciplease"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maxime/Documents/Reciplease/Reciplease/Controller/ResultSearchViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "8">
-               </Location>
-               <Location
-                  uuid = "8060C6F4-787C-4504-BFED-73E5FEF1DA05 - a799be17174be33b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Reciplease.ResultSearchViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Reciplease.ResultSearchViewController"
-                  moduleName = "Reciplease"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maxime/Documents/Reciplease/Reciplease/Controller/ResultSearchViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "440">
-               </Location>
-               <Location
-                  uuid = "8060C6F4-787C-4504-BFED-73E5FEF1DA05 - 1ab0d81b577ba7e5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Reciplease.ResultSearchViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Reciplease.ResultSearchViewController&gt;"
-                  moduleName = "Reciplease"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maxime/Documents/Reciplease/Reciplease/Controller/ResultSearchViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "416">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "96C1EB34-5F6B-44EC-8553-CB7EE3BE53B6"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reciplease/Model/CoreDataManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "createFavorite(label:calories:image:ingredients:totalTime:yield:url:starIcone:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "944E5BD1-E0D0-4D6A-BC31-1E4227812AAE"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -374,9 +250,9 @@
             filePath = "Reciplease/Model/CoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "createFavorite(label:calories:image:ingredients:totalTime:yield:url:starIcone:)"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "createFavorite(label:calories:image:ingredients:totalTime:yield:url:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -390,10 +266,26 @@
             filePath = "Reciplease/Model/CoreDataManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "createFavorite(label:calories:image:ingredients:totalTime:yield:url:starIcone:)"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "createFavorite(label:calories:image:ingredients:totalTime:yield:url:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8E5615ED-7CC6-482F-B602-DC35D9C0E7FB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Reciplease/Model/CoreDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "CoreDataManager"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
