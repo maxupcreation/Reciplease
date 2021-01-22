@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class RecipeDetailsViewController: UIViewController {
     
@@ -50,8 +51,6 @@ class RecipeDetailsViewController: UIViewController {
     var coreDataManager: CoreDataManager?
     
     
-    
-    
     //MARK:- View Cycle ♻️
     
     override func viewDidLoad() {
@@ -69,7 +68,7 @@ class RecipeDetailsViewController: UIViewController {
         coreDataManager = CoreDataManager(coreDataStack: appDelegate.coreDataStack)
         
         //X
-        
+       
         configure()
         
     }
@@ -80,8 +79,6 @@ class RecipeDetailsViewController: UIViewController {
             
             favoriteItemButton.image = UIImage(systemName: "star.fill")
         } else {  favoriteItemButton.image = UIImage(systemName: "star") }
-        
-        
     }
     
     //MARK:- Button Action 🔴
@@ -95,10 +92,11 @@ class RecipeDetailsViewController: UIViewController {
             
             favoriteItemButton.image = UIImage(systemName: "star.fill")
             
+            
             coreDataManager?.createFavorite (
                 label: dataRecipeIndexPath!.label,
                 calories: calorieLabel.text!,
-                image: "",
+                image: recipeImageView.image!,
                 ingredients: ingredientsTextView.text,
                 totalTime: String(dataRecipeIndexPath?.totalTime ?? 0) + " min",
                 yield: "",
@@ -111,7 +109,7 @@ class RecipeDetailsViewController: UIViewController {
         else {
             
             favoriteItemButton.image = UIImage(systemName: "star")
-            coreDataManager?.deleteFavorite()
+            coreDataManager?.IfRecipeRegisteredThenDeleteFavorite(name: nameRecipeLabel.text!)
             
         }
     }
@@ -127,26 +125,26 @@ class RecipeDetailsViewController: UIViewController {
     
     //MARK:- Interface Gestion 📱
     
+    
+    
     func configure() {
         
         nameRecipeLabel.text = dataRecipeIndexPath?.label
         
-        let recipeImage = dataRecipeIndexPath?.image
-        
-        //— 💡 Sd Web Image Pod gestion
-        
+        let recipeImage = dataRecipeIndexPath?.image!
         recipeImageView.sd_setImage(with: URL(string:recipeImage!))
-        
-        //X
+    
         
         timeLabel.text = String(dataRecipeIndexPath?.totalTime ?? 0) + "m"
         
         let ingredients = dataRecipeIndexPath?.ingredients.first?.text
+        
         let splitIngredientsWithTired = "-" + " " + ingredients!
         let splitIngredients = splitIngredientsWithTired.components(separatedBy: ",")
+        
         ingredientsTextView.text = splitIngredients.joined(separator: "\n - ")
         
-        //— 💡 Converted the data "calories" with a number "x" after the decimal point for CoreData.
+        //— 💡 Converted the data "calories" with a number 1 after the decimal point for CoreData.
         
         let calorie = dataRecipeIndexPath!.calories
         let formated = String(format: "%.1f k", calorie)
@@ -163,7 +161,9 @@ class RecipeDetailsViewController: UIViewController {
         
         //X
         
+        // enregistré coreData ici ? comment faire pour que les détails passent par coreData... 
     }
+    
     //MARK:- Conditions☝🏻
     
     

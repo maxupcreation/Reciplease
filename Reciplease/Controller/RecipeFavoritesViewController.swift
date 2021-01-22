@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SDWebImage
 
 class RecipeFavoritesViewController: UIViewController {
     
@@ -23,7 +22,6 @@ class RecipeFavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         //— ❗ Allows to update CoreData
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
@@ -32,8 +30,13 @@ class RecipeFavoritesViewController: UIViewController {
         //X
         
         setupCustomCell()
+        
         favoriteTableView.reloadData()
         
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        favoriteTableView.reloadData()
     }
     
 }
@@ -55,6 +58,7 @@ extension RecipeFavoritesViewController: UITableViewDataSource {
         let recipeCell =
             tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)  as? RecipeCelllTableViewCell
         
+       
         recipeCell?.configureCoreData(coreDataRecipe:coreDataManager!.favorite[indexPath.row])
         
         

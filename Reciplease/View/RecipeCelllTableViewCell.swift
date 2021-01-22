@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class RecipeCelllTableViewCell: UITableViewCell {
     
@@ -19,6 +20,7 @@ class RecipeCelllTableViewCell: UITableViewCell {
     @IBOutlet weak var calorieLabel: UILabel!
     
     @IBOutlet weak var timeLabel: UILabel!
+    
     
     
     override func awakeFromNib() {
@@ -71,6 +73,7 @@ class RecipeCelllTableViewCell: UITableViewCell {
         timeLabel.text = coreDataRecipe.totalTime
         //ingredientsLabel.text = coreDataRecipe.ingredients
         calorieLabel.text = coreDataRecipe.calories
+        recipeImageView.image = UIImage(data: coreDataRecipe.image!)
         
     }
     

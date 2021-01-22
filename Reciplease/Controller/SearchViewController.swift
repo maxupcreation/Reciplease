@@ -204,7 +204,6 @@ extension SearchViewController:UITableViewDelegate {
         
         if editingStyle == .delete {
             
-            
             coreDataManager?.deleteTasks(indexPath: indexPath)
             
             tableView.deleteRows(at: [indexPath], with: .fade)
