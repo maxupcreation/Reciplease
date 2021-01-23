@@ -49,6 +49,10 @@ class ResultSearchViewController: UIViewController{
         tableViewSearchResult.reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableViewSearchResult.reloadData()
+    }
+    
     //MARK:- Override 🧗
     
     //— 💡 *DataSegues : Passing of data between segues.
@@ -72,7 +76,7 @@ extension ResultSearchViewController: UITableViewDataSource {
     //— 💡 The tableView returns the results of the Recipe API, the data is contained in "Hit". (Look "RecipeSearchDataStruct")
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataRecipe!.hits.count
+        return dataRecipe?.hits.count ?? 0
     }
     
     //X
@@ -81,14 +85,14 @@ extension ResultSearchViewController: UITableViewDataSource {
         
         //— 💡 with the identifier, we retrieve the data contained in the Xib "RecipeCellTableViewCell" to access the "Configure" function and then we go to parameterize the API data with the index of the selected cell.
         
-        let recipeCell =
-            tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)  as? RecipeCelllTableViewCell
+        guard let recipeCell =
+                tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)  as? RecipeCelllTableViewCell else { return UITableViewCell() }
         
-        let dataIndexPath = dataRecipe?.hits[indexPath.row].recipe
+        let dataIndexPath = (dataRecipe?.hits[indexPath.row].recipe)!
         
-        recipeCell?.configure(dataRecipe: dataIndexPath!)
+        recipeCell.configure(dataRecipe: dataIndexPath)
         
-        return recipeCell!
+        return recipeCell
         
         //X
         

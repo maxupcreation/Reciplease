@@ -51,6 +51,7 @@ class RecipeDetailsViewController: UIViewController {
     var coreDataManager: CoreDataManager?
     
     
+    
     //MARK:- View Cycle ♻️
     
     override func viewDidLoad() {
@@ -74,11 +75,15 @@ class RecipeDetailsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         
         if coreDataManager?.isRecipeRegistered(name: nameRecipeLabel.text!) == true {
             
             favoriteItemButton.image = UIImage(systemName: "star.fill")
         } else {  favoriteItemButton.image = UIImage(systemName: "star") }
+    
+        
     }
     
     //MARK:- Button Action 🔴
@@ -131,10 +136,10 @@ class RecipeDetailsViewController: UIViewController {
         
         nameRecipeLabel.text = dataRecipeIndexPath?.label
         
-        let recipeImage = dataRecipeIndexPath?.image!
-        recipeImageView.sd_setImage(with: URL(string:recipeImage!))
-    
+        let recipeImage = dataRecipeIndexPath?.image ?? ""
         
+        recipeImageView.sd_setImage(with: URL(string:recipeImage))
+    
         timeLabel.text = String(dataRecipeIndexPath?.totalTime ?? 0) + "m"
         
         let ingredients = dataRecipeIndexPath?.ingredients.first?.text
@@ -160,8 +165,7 @@ class RecipeDetailsViewController: UIViewController {
         urlRecipeString = dataRecipeIndexPath?.url
         
         //X
-        
-        // enregistré coreData ici ? comment faire pour que les détails passent par coreData... 
+    
     }
     
     //MARK:- Conditions☝🏻

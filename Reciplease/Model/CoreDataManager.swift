@@ -10,12 +10,12 @@ import UIKit
 import CoreData
 
 final class CoreDataManager {
-
+    
     // MARK: - Properties
-
+    
     private let coreDataStack: CoreDataStack
     private let managedObjectContext: NSManagedObjectContext
-
+    
     
     var person: [Person] {
         let request: NSFetchRequest<Person> = Person.fetchRequest()
@@ -30,14 +30,14 @@ final class CoreDataManager {
         guard let favorite = try? managedObjectContext.fetch(request) else { return [] }
         return favorite
     }
-
+    
     // MARK: - Initializer
-
+    
     init(coreDataStack: CoreDataStack) {
         self.coreDataStack = coreDataStack
         self.managedObjectContext = coreDataStack.mainContext
     }
-
+    
     // MARK: - Manage func Entity
     
     func isRecipeRegistered(name:String) -> Bool {
@@ -52,44 +52,44 @@ final class CoreDataManager {
         // même principe pour la suppression.
     }
     
-    func returnCoreDataFavorite(name:String) -> Array<Any> {
-        let recipe = favorite
-        let stringPredicate = NSPredicate(format: "label == %@", name)
-        let recipeArray = recipe.filter() { name in stringPredicate.evaluate(with: name)}
-        return recipeArray
-    }
+    //    func returnCoreDataFavorite(name:String) -> Array<Any> {
+    //        let recipe = favorite
+    //        let stringPredicate = NSPredicate(format: "label == %@", name)
+    //        let recipeArray = recipe.filter() { name in stringPredicate.evaluate(with: name)}
+    //        return recipeArray
+    //    }
     
     func IfRecipeRegisteredThenDeleteFavorite(name:String){
-//        let recipe = favorite
+        //        let recipe = favorite
         let stringPredicate = NSPredicate(format: "label == %@", name)
-//        var recipeArray = recipe.filter() { name in stringPredicate.evaluate(with: name)}
+        //        var recipeArray = recipe.filter() { name in stringPredicate.evaluate(with: name)}
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteRecipe")
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-           // Perform the delete operation asynchronously:
+        // Perform the delete operation asynchronously:
         fetchRequest.predicate = stringPredicate
         coreDataStack.mainContext.perform { [self] in
             
-               do {
-                   // Try executing the batch request:
-                   try coreDataStack.mainContext.execute(batchDeleteRequest)
-                   if coreDataStack.mainContext.hasChanges {
-                       // Reflect the changes if anything changed:
+            do {
+                // Try executing the batch request:
+                try coreDataStack.mainContext.execute(batchDeleteRequest)
+                if coreDataStack.mainContext.hasChanges {
+                    // Reflect the changes if anything changed:
                     coreDataStack.saveContext()
-                   }
-               }
-               catch let error {
-                   // Handle the error here
-                   print(error)
-               }
-           }
-       }
+                }
+            }
+            catch let error {
+                // Handle the error here
+                print(error)
+            }
+        }
+    }
     
     func createFavorite(label:String,calories:String,image:UIImage,ingredients:String,totalTime:String,yield:String,url:String){
         let favorite = FavoriteRecipe(context: managedObjectContext)
         favorite.label = label
         favorite.calories = calories
         //favorite.image = image
-       // favorite.ingredients = ingredients
+        // favorite.ingredients = ingredients
         favorite.totalTime = totalTime
         favorite.yield = yield
         favorite.url = url
@@ -99,7 +99,7 @@ final class CoreDataManager {
         coreDataStack.saveContext()
     }
     
-
+    
     func createIngredients(ingredient: String) {
         let person = Person(context: managedObjectContext)
         person.ingredients = ingredient
@@ -116,5 +116,5 @@ final class CoreDataManager {
         person.forEach { managedObjectContext.delete($0) }
         coreDataStack.saveContext()
     }
-       
+    
 }

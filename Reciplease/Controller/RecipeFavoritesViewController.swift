@@ -11,7 +11,7 @@ import UIKit
 class RecipeFavoritesViewController: UIViewController {
     
     //MARK:- OutLet 🔗
-
+    
     @IBOutlet weak var favoriteTableView: UITableView!
     
     //MARK:- Propreties 📦
@@ -35,7 +35,8 @@ class RecipeFavoritesViewController: UIViewController {
         
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         favoriteTableView.reloadData()
     }
     
@@ -54,11 +55,11 @@ extension RecipeFavoritesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
+        
         let recipeCell =
             tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath)  as? RecipeCelllTableViewCell
         
-       
+        
         recipeCell?.configureCoreData(coreDataRecipe:coreDataManager!.favorite[indexPath.row])
         
         
