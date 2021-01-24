@@ -71,9 +71,12 @@ class RecipeCelllTableViewCell: UITableViewCell {
         
         titleLabel.text = coreDataRecipe.label
         timeLabel.text = coreDataRecipe.totalTime
-        //ingredientsLabel.text = coreDataRecipe.ingredients
+        
+        let ingredientsJoined = coreDataRecipe.ingredients?.joined(separator: "\n - ") ?? "no data ingredients"
+        ingredientsLabel.text = "-" + " " + ingredientsJoined
         calorieLabel.text = coreDataRecipe.calories
         recipeImageView.image = UIImage(data: coreDataRecipe.image!)
+        recipeImageView.contentMode = .scaleAspectFill
         
     }
     

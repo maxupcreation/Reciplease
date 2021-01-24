@@ -60,7 +60,7 @@ final class CoreDataManager {
     //    }
     
     func IfRecipeRegisteredThenDeleteFavorite(name:String){
-        //        let recipe = favorite
+        
         let stringPredicate = NSPredicate(format: "label == %@", name)
         //        var recipeArray = recipe.filter() { name in stringPredicate.evaluate(with: name)}
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteRecipe")
@@ -84,12 +84,12 @@ final class CoreDataManager {
         }
     }
     
-    func createFavorite(label:String,calories:String,image:UIImage,ingredients:String,totalTime:String,yield:String,url:String){
+    func createFavorite(label:String,calories:String,image:UIImage,ingredients:[String],totalTime:String,yield:String,url:String){
         let favorite = FavoriteRecipe(context: managedObjectContext)
         favorite.label = label
         favorite.calories = calories
-        //favorite.image = image
-        // favorite.ingredients = ingredients
+        favorite.image = image.pngData()
+        favorite.ingredients = ingredients
         favorite.totalTime = totalTime
         favorite.yield = yield
         favorite.url = url

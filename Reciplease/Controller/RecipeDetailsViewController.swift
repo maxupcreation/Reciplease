@@ -74,11 +74,11 @@ class RecipeDetailsViewController: UIViewController {
         
         if coreDataManager?.isRecipeRegistered(name: favoriteCoreIndex?.label ?? "no data") == false {
             
-            configure()
+            configureWithApi()
             
         } else {
             
-            configureCoreData()
+            configureWithCoreData()
             
         }
     }
@@ -107,12 +107,17 @@ class RecipeDetailsViewController: UIViewController {
             
             favoriteItemButton.image = UIImage(systemName: "star.fill")
             
+            var ingredientsArrayEmpty : [String] = []
+            
+            for ingredientArray in dataRecipeIndexPath!.ingredients {
+                ingredientsArrayEmpty = [ingredientArray.text]
+            }
             
             coreDataManager?.createFavorite (
                 label: dataRecipeIndexPath!.label,
                 calories: calorieLabel.text!,
                 image: recipeImageView.image!,
-                ingredients: ingredientsTextView.text,
+                ingredients: ingredientsArrayEmpty,
                 totalTime: String(dataRecipeIndexPath?.totalTime ?? 0) + " min",
                 yield: "",
                 url: urlRecipeString!)
@@ -142,7 +147,7 @@ class RecipeDetailsViewController: UIViewController {
     
     
     
-    func configure() {
+    func configureWithApi() {
         
         nameRecipeLabel.text = dataRecipeIndexPath?.label
         
@@ -150,19 +155,18 @@ class RecipeDetailsViewController: UIViewController {
         
         recipeImageView.sd_setImage(with: URL(string:recipeImage))
         
-        timeLabel.text = String(dataRecipeIndexPath?.totalTime ?? 0) + "m"
+        timeLabel.text = String(dataRecipeIndexPath?.totalTime ?? 0) + " min"
         
         let ingredients = dataRecipeIndexPath?.ingredients.first?.text
         
         let splitIngredientsWithTired = "-" + " " + ingredients!
         let splitIngredients = splitIngredientsWithTired.components(separatedBy: ",")
-        
         ingredientsTextView.text = splitIngredients.joined(separator: "\n - ")
         
         //— 💡 Converted the data "calories" with a number 1 after the decimal point for CoreData.
         
         let calorie = dataRecipeIndexPath!.calories
-        let formated = String(format: "%.1f k", calorie)
+        let formated = String(format: "%.1f cal", calorie)
         calorieForCoreData = formated
         calorieLabel.text = formated
         
@@ -178,9 +182,25 @@ class RecipeDetailsViewController: UIViewController {
         
     }
     
-    func configureCoreData() {
+    func configureWithCoreData() {
         
         nameRecipeLabel.text = favoriteCoreIndex?.label
+        
+         let imageViewFavoriteCore = UIImage(data: (favoriteCoreIndex?.image)!)
+        recipeImageView.image = imageViewFavoriteCore
+        //Mettre une image ?? par défaut.
+        recipeImageView.contentMode = .scaleAspectFill
+        
+        let ingredientsJoinged = favoriteCoreIndex?.ingredients?.joined(separator: "\n - ") ?? "no Data Ingredients"
+        
+        ingredientsTextView.text = "-" + " " + ingredientsJoinged
+        
+
+        calorieLabel.text = favoriteCoreIndex?.calories
+        
+        
+        
+            
         
     }
     
