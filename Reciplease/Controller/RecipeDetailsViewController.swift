@@ -36,6 +36,8 @@ class RecipeDetailsViewController: UIViewController {
     
     var dataRecipeIndexPath : Recipe?
     
+    var favoriteCoreIndex : FavoriteRecipe?
+    
     //— 💡 *UrlGetDirectionButton
     
     var urlRecipeString : String?
@@ -69,10 +71,18 @@ class RecipeDetailsViewController: UIViewController {
         coreDataManager = CoreDataManager(coreDataStack: appDelegate.coreDataStack)
         
         //X
-       
-        configure()
         
+        if coreDataManager?.isRecipeRegistered(name: favoriteCoreIndex?.label ?? "no data") == false {
+            
+            configure()
+            
+        } else {
+            
+            configureCoreData()
+            
+        }
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -82,7 +92,7 @@ class RecipeDetailsViewController: UIViewController {
             
             favoriteItemButton.image = UIImage(systemName: "star.fill")
         } else {  favoriteItemButton.image = UIImage(systemName: "star") }
-    
+        
         
     }
     
@@ -139,7 +149,7 @@ class RecipeDetailsViewController: UIViewController {
         let recipeImage = dataRecipeIndexPath?.image ?? ""
         
         recipeImageView.sd_setImage(with: URL(string:recipeImage))
-    
+        
         timeLabel.text = String(dataRecipeIndexPath?.totalTime ?? 0) + "m"
         
         let ingredients = dataRecipeIndexPath?.ingredients.first?.text
@@ -165,7 +175,13 @@ class RecipeDetailsViewController: UIViewController {
         urlRecipeString = dataRecipeIndexPath?.url
         
         //X
+        
+    }
     
+    func configureCoreData() {
+        
+        nameRecipeLabel.text = favoriteCoreIndex?.label
+        
     }
     
     //MARK:- Conditions☝🏻

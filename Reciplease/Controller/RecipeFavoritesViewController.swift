@@ -17,6 +17,8 @@ class RecipeFavoritesViewController: UIViewController {
     //MARK:- Propreties 📦
     var coreDataManager: CoreDataManager?
     
+    var favoriteCoreIndex : FavoriteRecipe?
+    
     //MARK:- View Cycle ♻️
     
     override func viewDidLoad() {
@@ -38,6 +40,17 @@ class RecipeFavoritesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favoriteTableView.reloadData()
+    }
+    
+    //MARK:- Override 🧗
+
+    //— 💡 *DataSegues : Passing of data between segues.
+    // self -> RecipeDetailsViewController
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let recipesVC = segue.destination as? RecipeDetailsViewController {
+            recipesVC.favoriteCoreIndex = favoriteCoreIndex
+        }
     }
     
 }
@@ -99,13 +112,12 @@ func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) ->
 
 //X
 
-
 //MARK:- TableView Delegate
 
 extension RecipeFavoritesViewController:UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        favoriteCoreIndex = coreDataManager?.favorite[indexPath.row]
         self.performSegue(withIdentifier: "favoriteRecipeToDetails", sender: (Any).self)
     }
 }
