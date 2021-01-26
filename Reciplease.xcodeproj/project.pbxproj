@@ -111,9 +111,7 @@
 		9C00C0C3259A4B96002FDEB7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9C39B16D259FCF1B00AD0D0D /* CoreDataStack.swift */,
-				9C39B172259FCF8400AD0D0D /* CoreDataManager.swift */,
-				9C945CE1259A49EA00D7F7B3 /* Reciplease.xcdatamodeld */,
+				9CEB920D25C0574000B7410F /* CoreData */,
 				9C26AD7825A7B670007B7BBC /* RecipeSearchDataStruct.swift */,
 				9C26AD8625A7CE81007B7BBC /* RequestService.swift */,
 				9C26AD6825A78C64007B7BBC /* RecipeSearchSession.swift */,
@@ -171,6 +169,16 @@
 				9C00C0C5259A4BB3002FDEB7 /* Supporting files */,
 			);
 			path = Reciplease;
+			sourceTree = "<group>";
+		};
+		9CEB920D25C0574000B7410F /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				9C39B16D259FCF1B00AD0D0D /* CoreDataStack.swift */,
+				9C39B172259FCF8400AD0D0D /* CoreDataManager.swift */,
+				9C945CE1259A49EA00D7F7B3 /* Reciplease.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		AD5E6C0C2EB65305A718A1DD /* Pods */ = {

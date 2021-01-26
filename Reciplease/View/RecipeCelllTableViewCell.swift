@@ -39,8 +39,6 @@ class RecipeCelllTableViewCell: UITableViewCell {
         
         let title = dataRecipe.label
         
-        let ingredients = dataRecipe.ingredients[0].text
-        
         
         //— 💡 Calorie Formated
         
@@ -54,7 +52,19 @@ class RecipeCelllTableViewCell: UITableViewCell {
         
         titleLabel.text = title
         
-        ingredientsLabel.text = ingredients
+        //— 💡 ingredients Array to String
+        
+        var ingredientsArrayEmpty : [String] = []
+        
+        for ingredientArray in dataRecipe.ingredients {
+            ingredientsArrayEmpty.append(ingredientArray.text)
+        }
+        
+        let ingredientsArrayConvertedToString = ingredientsArrayEmpty.joined(separator: "\n - ")
+        
+        ingredientsLabel.text = "-" + " " + ingredientsArrayConvertedToString
+        
+        //X
         
         timeLabel.text = String(time) + " min"
         

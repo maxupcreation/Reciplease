@@ -52,7 +52,6 @@ class RecipeFavoritesViewController: UIViewController {
             recipesVC.favoriteCoreIndex = favoriteCoreIndex
         }
     }
-    
 }
 
 //MARK:- Extension ↔️
@@ -119,5 +118,24 @@ extension RecipeFavoritesViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         favoriteCoreIndex = coreDataManager?.favorite[indexPath.row]
         self.performSegue(withIdentifier: "favoriteRecipeToDetails", sender: (Any).self)
+    }
+}
+
+//— 💡 Add a text center in tableView if is nil.
+
+extension RecipeFavoritesViewController {
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "Search for recipes and add them to your favorites by clicking on ⭐️ "
+        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.textAlignment = .center
+        label.textColor = .darkGray
+        label.numberOfLines = 0
+        return label
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return coreDataManager?.favorite.isEmpty ?? true ? 450 : 0
     }
 }

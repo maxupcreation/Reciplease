@@ -44,7 +44,7 @@ class RecipeDetailsViewController: UIViewController {
     
     //X
     
-    var calorieForCoreData: String?
+   private var calorieForCoreData: String?
     
     var nameCoreArray : [String]?
     
@@ -110,7 +110,7 @@ class RecipeDetailsViewController: UIViewController {
             var ingredientsArrayEmpty : [String] = []
             
             for ingredientArray in dataRecipeIndexPath!.ingredients {
-                ingredientsArrayEmpty = [ingredientArray.text]
+                ingredientsArrayEmpty.append(ingredientArray.text)
             }
             
             coreDataManager?.createFavorite (
@@ -157,11 +157,19 @@ class RecipeDetailsViewController: UIViewController {
         
         timeLabel.text = String(dataRecipeIndexPath?.totalTime ?? 0) + " min"
         
-        let ingredients = dataRecipeIndexPath?.ingredients.first?.text
+        //— 💡
         
-        let splitIngredientsWithTired = "-" + " " + ingredients!
-        let splitIngredients = splitIngredientsWithTired.components(separatedBy: ",")
-        ingredientsTextView.text = splitIngredients.joined(separator: "\n - ")
+        var ingredientsArrayEmpty : [String] = []
+        
+        for ingredientArray in dataRecipeIndexPath!.ingredients {
+            ingredientsArrayEmpty.append(ingredientArray.text)
+        }
+        
+        let ingredientsArrayConvertedToString = ingredientsArrayEmpty.joined(separator: "\n - ")
+        
+        let ingredients = "-" + " " + ingredientsArrayConvertedToString
+        
+        ingredientsTextView.text = ingredients
         
         //— 💡 Converted the data "calories" with a number 1 after the decimal point for CoreData.
         
@@ -195,12 +203,10 @@ class RecipeDetailsViewController: UIViewController {
         
         ingredientsTextView.text = "-" + " " + ingredientsJoinged
         
+        timeLabel.text = favoriteCoreIndex?.totalTime ?? "No time Data"
+        
 
         calorieLabel.text = favoriteCoreIndex?.calories
-        
-        
-        
-            
         
     }
     

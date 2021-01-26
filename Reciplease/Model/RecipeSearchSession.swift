@@ -20,7 +20,6 @@ final class RecipeSearchSession:AlamofireSessions{
         callback(DataResponse)
     }
     
-    
     }
     
 }

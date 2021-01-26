@@ -226,7 +226,7 @@ extension SearchViewController {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return coreDataManager?.person.isEmpty ?? true ? 200 : 0
+        return coreDataManager?.person.isEmpty ?? true ? 230 : 0
     }
 }
 
