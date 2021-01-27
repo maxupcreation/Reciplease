@@ -52,17 +52,8 @@ class RecipeCelllTableViewCell: UITableViewCell {
         
         titleLabel.text = title
         
-        //— 💡 ingredients Array to String
         
-        var ingredientsArrayEmpty : [String] = []
-        
-        for ingredientArray in dataRecipe.ingredients {
-            ingredientsArrayEmpty.append(ingredientArray.text)
-        }
-        
-        let ingredientsArrayConvertedToString = ingredientsArrayEmpty.joined(separator: "\n - ")
-        
-        ingredientsLabel.text = "-" + " " + ingredientsArrayConvertedToString
+        ingredientsLabel.text = dataRecipe.ingredients.first?.text
         
         //X
         
@@ -82,17 +73,14 @@ class RecipeCelllTableViewCell: UITableViewCell {
         titleLabel.text = coreDataRecipe.label
         timeLabel.text = coreDataRecipe.totalTime
         
-        let ingredientsJoined = coreDataRecipe.ingredients?.joined(separator: "\n - ") ?? "no data ingredients"
-        ingredientsLabel.text = "-" + " " + ingredientsJoined
+       
+        ingredientsLabel.text = coreDataRecipe.ingredients?[0]
         calorieLabel.text = coreDataRecipe.calories
         recipeImageView.image = UIImage(data: coreDataRecipe.image!)
         recipeImageView.contentMode = .scaleAspectFill
         
     }
-    
-    
-    
-    
+
 }
 
 ////— 💡 extension for load image with Url

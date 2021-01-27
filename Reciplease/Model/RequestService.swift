@@ -11,10 +11,7 @@
             self.session = session
         }
         
-      
-        
         // MARK: - Management
-        
         
         func getData(food:String,callback: @escaping (Result<RecipeSearchDataStruct, RecipeError>) -> Void) {
             
@@ -68,10 +65,8 @@
             case .undecodableData:
                 return "Data can't be decoded !"
             }
-            
         }
             
         }
         
     }
-    

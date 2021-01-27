@@ -174,9 +174,9 @@
 		9CEB920D25C0574000B7410F /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				9C39B16D259FCF1B00AD0D0D /* CoreDataStack.swift */,
 				9C39B172259FCF8400AD0D0D /* CoreDataManager.swift */,
 				9C945CE1259A49EA00D7F7B3 /* Reciplease.xcdatamodeld */,
+				9C39B16D259FCF1B00AD0D0D /* CoreDataStack.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";

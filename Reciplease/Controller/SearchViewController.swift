@@ -60,10 +60,6 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        coreDataManager?.deleteAllIgredient()
-    }
-    
     //MARK:- Button Action 🔴
     
     @IBAction func addIngredientsAction(_ sender: Any) {
@@ -91,10 +87,12 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
             switch result {
             case .success(let data):
                 
-                self.dataRecipe = data
-                
-                self.performSegue(withIdentifier: "searchSegue", sender: (Any).self)
-                
+                if self.coreDataManager?.person.count ?? 0 > 0 {
+                    self.dataRecipe = data
+                    self.performSegue(withIdentifier: "searchSegue", sender: (Any).self)
+                } else {
+                    self.displayNeedIngredientsAlert()
+                }
                 
             case .failure(let error):
                 print(error)
@@ -126,6 +124,17 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
             }
         }
     }
+    
+    func displayNeedIngredientsAlert() {
+        let alertController = UIAlertController(title: "Add ingredients to find recipes", message: "", preferredStyle: .alert)
+        
+        let addAction = UIAlertAction(title: "Ok", style: .default)
+        
+        
+        alertController.addAction(addAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
     
     //MARK:- KeyBoard Gestion ⌨️
     
@@ -198,6 +207,25 @@ extension SearchViewController: UITableViewDataSource{
 }
 
 
+//— 💡 Add a text center in tableView if is nil.
+
+extension SearchViewController {
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "Add some ingredients in the list"
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.textAlignment = .center
+        label.textColor = .darkGray
+        return label
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return coreDataManager?.person.isEmpty ?? true ? 230 : 0
+    }
+}
+
+
 extension SearchViewController:UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -210,23 +238,6 @@ extension SearchViewController:UITableViewDelegate {
             
             tableView.reloadData()
         }
-    }
-}
-
-//— 💡 Add a text center in tableView if is nil.
-
-extension SearchViewController {
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let label = UILabel()
-        label.text = "Add some ingredients in the list"
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        label.textAlignment = .center
-        label.textColor = .darkGray
-        return label
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return coreDataManager?.person.isEmpty ?? true ? 230 : 0
     }
 }
 
