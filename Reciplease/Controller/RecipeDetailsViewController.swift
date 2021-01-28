@@ -130,7 +130,6 @@ class RecipeDetailsViewController: UIViewController {
             
             favoriteItemButton.image = UIImage(systemName: "star")
             coreDataManager?.ifRecipeRegisteredThenDeleteFavorite(name: nameRecipeLabel.text!)
-            
         }
     }
     

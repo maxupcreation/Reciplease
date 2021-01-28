@@ -17,13 +17,6 @@ final class CoreDataManager {
     private let managedObjectContext: NSManagedObjectContext
     
     
-    var person: [Person] {
-        let request: NSFetchRequest<Person> = Person.fetchRequest()
-        //request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        guard let person = try? managedObjectContext.fetch(request) else { return [] }
-        return person
-    }
-    
     var favorite: [FavoriteRecipe] {
         let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()
         //request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -72,24 +65,6 @@ final class CoreDataManager {
             
             let image = image.pngData()
             favorite.image = image
-            coreDataStack.saveContext()
-        }
-        
-        
-        func createIngredients(ingredient: String) {
-            let person = Person(context: managedObjectContext)
-            person.ingredients = ingredient
-            coreDataStack.saveContext()
-        }
-        
-        func deleteTasks(indexPath : IndexPath) {
-            let removeCellHomeTasksIndexPath = person[indexPath.row]
-            managedObjectContext.delete(removeCellHomeTasksIndexPath)
-            coreDataStack.saveContext()
-        }
-        
-        func deleteAllIgredient() {
-            person.forEach { managedObjectContext.delete($0) }
             coreDataStack.saveContext()
         }
     }

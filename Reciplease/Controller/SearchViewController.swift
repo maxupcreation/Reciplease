@@ -36,8 +36,8 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     var dataRecipe : RecipeSearchDataStruct?
     
     //— 💡 Food Array for passing strings in request
+    var serviceIngredientsFridge : ServiceIngredientsFridge?
     
-    var food : [String] = []
     
     //MARK:- View Cycle ♻️
     
@@ -49,10 +49,11 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         
         cornerRadiusEffect()
         
-        //— ❗ Allows to update CoreData
+        //— ❗ Allows to update ingredients
         
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        coreDataManager = CoreDataManager(coreDataStack: appDelegate.coreDataStack)
+        serviceIngredientsFridge = ServiceIngredientsFridge()
+//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+//        coreDataManager = CoreDataManager(coreDataStack: appDelegate.coreDataStack)
         
         //X
         
@@ -67,8 +68,8 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func tappedDeleteButton(_ sender: Any) {
-        coreDataManager?.deleteAllIgredient()
-        food.removeAll()
+        //coreDataManager?.deleteAllIgredient()
+       // serviceIngredientsFridge.ingredientsFridge.removeAll()
         ingredientsTableView.reloadData()
     }
     
@@ -77,7 +78,7 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         
         //— 💡 We join all the strings (ingredients) in the table
         
-        let foodJoined = food.joined(separator: ",")
+        let foodJoined = serviceIngredientsFridge?.ingredientsFridge.joined(separator: ",") ?? "no food data"
         
         //X
         
@@ -87,7 +88,7 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
             switch result {
             case .success(let data):
                 
-                if self.coreDataManager?.person.count ?? 0 > 0 {
+                if self.serviceIngredientsFridge?.ingredientsFridge.count ?? 0 > 0 {
                     self.dataRecipe = data
                     self.performSegue(withIdentifier: "searchSegue", sender: (Any).self)
                 } else {
@@ -117,8 +118,10 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
         let ingredients = ingredientsTextField.text ?? ""
         if ingredients != "" {
             if ingredients.containsValidCharacter == true {
-                coreDataManager?.createIngredients(ingredient: ingredients)
-                food.append(ingredients)
+                //coreDataManager?.createIngredients(ingredient: ingredients)
+                
+                serviceIngredientsFridge?.addIngredients(ingredients: ingredients)
+        
                 ingredientsTableView.reloadData()
                 ingredientsTextField.text = ""
             }
@@ -178,7 +181,7 @@ extension SearchViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return coreDataManager?.person.count ?? 0
+        return  serviceIngredientsFridge?.ingredientsFridge.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -186,7 +189,7 @@ extension SearchViewController: UITableViewDataSource{
         let taskCell =
             tableView.dequeueReusableCell(withIdentifier: "ingredientsCell", for: indexPath)
         
-        taskCell.textLabel?.text = coreDataManager?.person[indexPath.row].ingredients
+        taskCell.textLabel?.text = serviceIngredientsFridge!.ingredientsFridge[indexPath.row]
         
         return taskCell
     }
@@ -221,7 +224,7 @@ extension SearchViewController {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return coreDataManager?.person.isEmpty ?? true ? 230 : 0
+        return  serviceIngredientsFridge?.ingredientsFridge.isEmpty ?? true ? 230 : 0
     }
 }
 
@@ -232,7 +235,7 @@ extension SearchViewController:UITableViewDelegate {
         
         if editingStyle == .delete {
             
-            coreDataManager?.deleteTasks(indexPath: indexPath)
+            //ingredientsData?.ingredients(indexPath: indexPath)
             
             tableView.deleteRows(at: [indexPath], with: .fade)
             

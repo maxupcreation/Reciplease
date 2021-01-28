@@ -74,7 +74,7 @@ class RecipeCelllTableViewCell: UITableViewCell {
         timeLabel.text = coreDataRecipe.totalTime
         
        
-        ingredientsLabel.text = coreDataRecipe.ingredients?[0]
+        ingredientsLabel.text = coreDataRecipe.ingredients![0]
         calorieLabel.text = coreDataRecipe.calories
         recipeImageView.image = UIImage(data: coreDataRecipe.image!)
         recipeImageView.contentMode = .scaleAspectFill
