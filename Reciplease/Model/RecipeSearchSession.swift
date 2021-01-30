@@ -18,8 +18,6 @@ final class RecipeSearchSession:AlamofireSessions{
     { AF.request(url).responseJSON { DataResponse
         in
         callback(DataResponse)
+        }
     }
-    
-    }
-    
 }

@@ -91,6 +91,7 @@ class SearchViewController: UIViewController,UITextFieldDelegate {
                 if self.serviceIngredientsFridge?.ingredientsFridge.count ?? 0 > 0 {
                     self.dataRecipe = data
                     self.performSegue(withIdentifier: "searchSegue", sender: (Any).self)
+                
                 } else {
                     self.displayNeedIngredientsAlert()
                 }
